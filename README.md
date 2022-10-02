@@ -108,5 +108,5 @@ your own operating system while implementing strict rules.
     ```
     - Add these values
     ```
-        ...retry=3 lcredit =-1 ucredit=-1 dcredit=-1 maxrepeat=3 usercheck=0 difok=7 enforce_for_root
+        ..retry=3 lcredit =-1 ucredit=-1 dcredit=-1 maxrepeat=3 usercheck=0 difok=7 enforce_for_root
     ```
