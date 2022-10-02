@@ -76,3 +76,37 @@ your own operating system while implementing strict rules.
 ```
     $ sudo ufw allow 4242
 ```
+
+#### Set password policy
+- Password expiration, Min number of days allowed before the modification & Notification before expiration at least 7 days before.
+  - Open login.defs file
+    ```
+        $ sudo nano /etc/login.defs
+    ```
+  - Find this part & edit it like this
+    ```
+        PASS_MAX_DAYS 30
+        PASS_MIN_DAYS 2
+        PASS_WARN_AGE 7
+    ```
+- Characters long, Contain (uppercase, lowercase letter, and a number), Not contain more than 3 consecutive identical characters.
+    - Open the file
+    ```
+        $ sudo nano /etc/pam.d/common-password
+    ```
+    - Find the following line
+    ```
+        password [success=1 default=ignore] pam_unix.so obscure sha512
+    ```
+    - And add an extra word: minlen=10 at the end
+    ```
+        password [success=2 default=ignore] pam_unix.so obscure sha512 minlen=10
+    ```
+    - Find this line
+    ```
+        password    requisite   pam_pwquality.so retry=3
+    ```
+    - Add these values
+    ```
+        ...pam_pwquality.so retry=3 lcredit =-1 ucredit=-1 dcredit=-1 maxrepeat=3 usercheck=0 difok=7 enforce_for_root
+    ```
