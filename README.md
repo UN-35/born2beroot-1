@@ -50,3 +50,29 @@ your own operating system while implementing strict rules.
 ```
     $ sudo apt install openssh-server
 ```
+
+- Changing default port (22) to 4242 (Edit the file, change the line Port22 to Port 4242)
+```
+    $ sudo nano /etc/ssh/sshd_config
+```
+
+#### Installing and configuring UFW
+- Install UFW
+```
+    $ sudo apt install ufw
+```
+
+- Enable
+```
+    $ sudo ufw enable
+```
+
+- Configure the rules
+```
+    $ sudo ufw allow ssh
+```
+
+- Configure the port rules
+```
+    $ sudo ufw allow 4242
+```
