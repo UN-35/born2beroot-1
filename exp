@@ -1,0 +1,113 @@
+- how a virtual machine work ? 
+ + is a software
+ + computer inside a computer
+ + run on isolated partition of its host computer
+ + it exploit the given part of host hardware
+
+- basic difference between CentOS and debian ?
+ + i choose debian because its easier
+ + GNU in debian is friendly than centOS
+ + package manager and upgrade on debian is much easier 
+ + debian has larger community
+ + centOS used a lot for server unlike debian used for normal computer
+
+- the purpose of virtual machine ?
+ + operate multiple OS at the same time and host
+
+- difference between apt and aptitude ?
+ + apt is command line interface tool while aptitude is graphical interface tool
+ + aptitude has better package manager than while apt is a low level package mnager that can be used by other higher level package manger
+ + aptitude is vaster in functionality than apt and its variant (apt-cache, apt-mark)
+
+- what is AppArmor ?
+ + allow sysadmin to restrict the actions that processes can perform
+ + to test AppArmor status (sudo aa-status)
+
+- script must display info every 5 min ?
+ + crontab -e (then modify */10 wiht */5)
+
+
+- UFW check (sudo service ufw status)
+ + UFW is a netfilter
+
+- SSH check (sudo service ssh status)
+ + ssh is a network protocol that give users a secure acces to computer over an unsecure network
+
+- OS check (head -n 2 /etc/os-release)
+
+-----------------USER--------------------->
+
+- user check (mtellami) and check group belong to (groups)
+
+- check password policy
+ + create new user (sudo adduser <user_name>)
+ + verefy password expire info (sudo chage -l <user_name>)
+ + assign new user to sudo and user42 groups (sudo adduser <user_name> <group_name>)
+ + explain how i set password policy (
+    * need to install libpam (password quality tool)
+    * password rules (cat /etc/pam.d/common-password)
+    * password expire (cat /etc/login/defs)
+ )
+ + create 'evaluation' group (sudo groupadd <group_name>)
+ + add user to group (sudo adduser <user_name> <group_name>
+ + check if belong to group (sudo getent group evaluating)
+ )
+
+-----------------HOSTNAME AND PARTITIOM---------------->
+
+- hostname check (hostnamectl)
+- change hostname (hostnamectl set-hostname <new_hostname>, sudo nano /etc/hosts (change hostname), reboot)
+- how to view partition (lsblk)
+
+-----------------SUDO--------------------->
+
+- SUDO check (dpkg -l | grep sudo)
+- assign eval user to sudo group (sudo /etc/adduser <user_name> sudo)
+- show the limit of 3 try (sudo nano /etc/sudoers)
+- show sudo logfile (in same file)
+- show that TTY mode is enabled (in same file)
+- explain secure path logic (bin:sbin)
+- show the logfile (cat /var/log/sudo/sudo.log)
+
+------------------UFW-------------------->
+
+- UFW check (dpkg -l | grep ufw)
+- check that its working (sudo service ufw status)
+- explain the purpose of ufw
+ + is software app that filter what is allowed to come in or go out from a network over ports, give full control of close or open ports
+ + show open port(4242) (sudo ufw status)
+ + allow new port 8080 (sudo ufw allow 8080)
+ + delete the new port (sudo ufw delete 8080)
+
+------------------SSH-------------------->
+
+- check that ssh is intalled (dpkg -l | grep ssh)
+- check that its working (sudo service ssh status)
+- what is ssh and its purpose
+ + is remote admin protocol allow users to communicate with server (authentication) (encryption)
+ + encryption technique :
+  * Symmetric ecryption (one key)
+  * Asymmetric ecryption (use two key(public & private))
+  * Hashing (dont need to be decrypted)
+ + verify that ssh using only 4242 port (sudo grep Port /etc/ssh/sshd_config) (check in VM network setting)
+ + connect with ssh (ssh user_name@hostname -p 4242)
+ + check that you cant use ssh as root (ssh root@hostname -p 4242)
+
+------------------SCRIPT-------------------->
+
+- explain the script
+ + header (#!/bin/bash)
+ + what is wall
+ + uname command with option
+ + difference between CPU vCPU
+ + free command with option
+ + df command with option
+ + who command with option
+ + lsblk command with option
+ + users
+ + hostname & ip
+- what is cron & explain
+- check for script run every 30s
+- stop executing the script and reboot for check
+
+link1 : https://github.com/achrafelkhnissi/Born2beroot/blob/master/evaluation.md
