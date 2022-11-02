@@ -22,29 +22,12 @@ your own operating system while implementing strict rules.
 
 ### ♦️ . Mandatory part
 
-#### Create partitions using LVM
-- Identity Disk and Create Physical Volume (PV)
+#### Installing requirement
 ```
-    $ sudo fdisk -l
-    $ sudo pvcreate  <disk1> <disk2>
+    $ sudo apt update && sudo apt upgrade -y 
+    $ sudo apt install vim
 ```
-- Create Volume Group (VG)
-```
-    $ sudo vgcreate <vg_name> <pv>
-```
-- Create Logical volume (LV) from Volume Group (VG)
-```
-    $ sudo lvcreate -L <Size> -n <lv_name> <vg_name>
-```
-- Format LVM partition
-```
-    $ sudo mkfs.ext4 <LV_Path>
-```
-- Create a mount point
-```
-    $ sudo mkdir /data
-    $ sudo mount /dev/<vg_name>/<lv_name> /data
-```
+
 
 #### Installing SSH and configuring SSH service
 ```
@@ -191,5 +174,13 @@ your own operating system while implementing strict rules.
 ```
     Defaults  secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
 ```
-### Create monitoring.sh file
-- 
+###  Bash script & Cronjob
+- <a href="https://github.com/mtellami/born2beroot/blob/main/monitoring.sh">monitoring.sh</a>
+- open cronjob
+```
+    $ sudo crontab -e
+```
+- add this line
+```
+    */10 * * * * /usr/local/bin/monitoring.sh
+```
